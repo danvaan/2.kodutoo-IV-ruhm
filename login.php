@@ -21,8 +21,32 @@
 	$signupEmailError = "*";
 	$signupEmail = "";
 	
-	//kas keegi vajutas nuppu ja see on olemas
+	//loginEmailError
 	
+	$loginEmailError = "*";
+	$loginEmail = "";
+
+	if (isset ($_POST["loginEmail"])) {
+		
+		//on olemas
+		// kas epost on tühi
+		if (empty ($_POST["loginEmail"])) {
+			
+			// on tühi
+			$loginEmailError = "* Väli on kohustuslik!";
+			
+		} else {
+			// email on olemas ja õige
+			$loginEmail = $_POST["loginEmail"];
+			
+		}
+		
+	} 
+	
+	
+	
+		//signupEmailError
+		
 	if (isset ($_POST["signupEmail"])) {
 		
 		//on olemas
@@ -38,7 +62,29 @@
 			
 		}
 		
-	} 
+	}  
+	
+	$loginPasswordError = "*";
+	
+	if (isset ($_POST["loginPassword"])) {
+		
+		if (empty ($_POST["loginPassword"])) {
+			
+			$loginPasswordError = "* Väli on kohustuslik!";
+			
+		} else {
+			
+			// parool ei olnud tühi
+			
+			if ( strlen($_POST["loginPassword"]) < 8 ) {
+				
+				$loginPasswordError = "* Parool peab olema vähemalt 8 tähemärkki pikk!";
+				
+			}
+			
+		}
+	}	
+		
 	
 	$signupPasswordError = "*";
 	
@@ -131,11 +177,11 @@
 		<form method="POST" >
 			
 			<label>E-post</label><br>
-			<input name="loginEmail" type="email">
+			<input name="loginEmail" type="email"> <?php echo $loginEmailError; ?>
 			
 			<br><br>
 
-			<input name="loginPassword" placeholder="Parool" type="password">
+			<input name="loginPassword" placeholder="Parool" type="password"> <?php echo $loginPasswordError; ?>
 			
 			<br><br>
 			
